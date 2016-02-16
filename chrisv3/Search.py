@@ -1,4 +1,4 @@
-# File name: Search.py
+https://github.com/blarblar/AIProject1.githttps://github.com/blarblar/AIProject1.git# File name: Search.py
 # Author: Christine Vu
 # Date: Feb 10, 2016
 # Email: chrisv3@umbc.edu
@@ -186,7 +186,6 @@ def UCS(dic, strt, end, keys):
         for i in range(currentLEN):
 
             print "-----------------"
-            #temp = temp2
             print "TEMP = ", temp
             print "queue = ", queue
             print "i = ", i
@@ -200,13 +199,7 @@ def UCS(dic, strt, end, keys):
                 print "queue1 = ", queue
                 temp.insert(-1, dic[lowest][i][0])
                 print "queue2 = ", queue
-                #print "temp[-1] = temp[-1] + dic[lowest][i][1] = ", temp
-                #temp.insert(-1, dic[lowest][i][1])
-                #temp.insert(-1, dic[lowest][i][0])
-                #temp.insert(-1, dic[lowest][i][1])
                 print "inserting...", dic[lowest][i][0]
-                #temp[-1] = temp[-1] + dic[lowest][i][1]
-                #queue.append(temp)
                 print "TEMP = ", temp
                 queue.append(temp)
                 queue.sort(key=lambda x: x[-1])
@@ -252,11 +245,23 @@ def main():
     print 'Argument List:', str(sys.argv)
 
     numArg = len(sys.argv)
+    print "numARG = ", numArg
     
 
     for i in range(numArg):
         print str(sys.argv[i])
 
+    inputFile = str(sys.argv[1])
+    output = str(sys.argv[2])
+    startNode = str(sys.argv[3])
+    endNode = str(sys.argv[4])
+    searchType = str(sys.argv[5])
+
+    print "inputFile = ", inputFile
+    print "output = ", output
+    print "startNode = ", startNode
+    print "endNode = ", endNode
+    print "searchType = ", searchType  
 
     #prints greeting
  #   printGreeting()
@@ -333,15 +338,36 @@ def main():
 
 
     print "***************STARTING BFS*****************"
-    result = BFS2(d, 'A', 'D', keys)
-    print "BFS = ", result
+
+    writeTo = open(output, 'w')
+
+    if searchType == "BFS":
+        result = BFS2(d, 'A', 'D', keys)
+        print "BFS = ", result
+
+        for i in range(len(result)):
+            writeTo.write(result[i])
+            writeTo.write("\n")
+
+    if searchType == "DFS":
+        result = DFS(d, 'A', 'D', keys)
+        print "DFS = ", result
+
+        for i in range(len(result)):
+            writeTo.write(result[i])
+            writeTo.write("\n")
+
+    if searchType == "UCS":
+        result = UCS(d, 'A', 'F', keys)
+        print "UCS = ", result
+
+        for i in range(len(result)):
+            writeTo.write(result[i])
+            writeTo.write("\n")
+
+    writeTo.close()
 
 
-    result = DFS(d, 'A', 'D', keys)
-    print "DFS = ", result
-
-    result = UCS(d, 'A', 'F', keys)
-    print "UCS = ", result
     
     #baseTenList will be a list taken from the toBase10() function. 
     #this list will hold the base 10 ASCII values or ".." of the file
@@ -352,3 +378,5 @@ def main():
 
 
 main()
+
+
