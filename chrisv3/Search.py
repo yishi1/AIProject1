@@ -273,7 +273,7 @@ def main():
 
     if searchType == "BFS":
         result = BFS2(d, startNode, endNode, keys)
-        print "BFS = ", result
+        
 
         for i in range(len(result)):
             writeTo.write(result[i])
@@ -281,7 +281,6 @@ def main():
 
     if searchType == "DFS":
         result = DFS(d, startNode, endNode, keys)
-        print "DFS = ", result
 
         for i in range(len(result)):
             writeTo.write(result[i])
