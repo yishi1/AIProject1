@@ -64,10 +64,8 @@ def dfs(startNode, endNode):
 def bfs(startNode, endNode):
    
     visited= []
- 
     q = queue.Queue()
     q.put(startNode)
-    
     distanceMap = {}
     # each key store in new dictionary
     for eachKey in graph:
@@ -76,7 +74,6 @@ def bfs(startNode, endNode):
         for data1 in graph[eachKey]:
             distanceMap[data1[0]] = 99999
     discoverMap = {}
-   # print(eachKey)
     distanceMap[startNode] = 0
 
     while not q.empty():
@@ -84,8 +81,6 @@ def bfs(startNode, endNode):
         visited.append(parentNode)
         if parentNode == endNode:
             break
-    #    print ("1111")
-
         if not  parentNode in graph:
             continue
         # loop lingju
@@ -100,29 +95,18 @@ def bfs(startNode, endNode):
                 distanceMap[childNode]= newDistance
                 # {b} = a
                 discoverMap[childNode]= parentNode
-
-#jia you xian du
             if not childNode in visited:
-
                 q.put(childNode)
-            
-                       # print(childNode)
         # pop shortest distance
 
     path= []
     path.append(endNode)
     previousNode = discoverMap[endNode]
     while not previousNode == startNode:
-      #  print("666")
-      #  print(previousNode)
         path.append(previousNode)
         previousNode = discoverMap[previousNode]
     path.append(startNode)
     path.reverse()
-   # print(startNode)
-   # print(path)
-   # print(distanceMap[endNode])
-
     return(path)
 
 
@@ -131,8 +115,6 @@ def bfs(startNode, endNode):
 def ucs(startNode, endNode):
     
     visited= []
- #   print(startNode + endNode)
- #   print (graph[startNode])
 #    initial priority queue
     q = PQ()
     q.put(startNode,0)
@@ -166,8 +148,6 @@ def ucs(startNode, endNode):
                 distanceMap[childNode]= newDistance
                 # {b} = a
                 discoverMap[childNode]= parentNode
-
-#jia you xian du 
             if not childNode in visited:
                 q.put(childNode,distanceMap[childNode])
         # pop shortest distance
@@ -175,26 +155,15 @@ def ucs(startNode, endNode):
     path= []
     path.append(endNode)
     previousNode = discoverMap[endNode]
-   # print("555")
-   # print(endNode)
     while not previousNode == startNode:
-      #  print("666")
-      #  print(previousNode)
         path.append(previousNode)
         previousNode = discoverMap[previousNode]
     path.append(startNode)
     path.reverse()
-   # print(startNode)
-   # print(path)
-   # print(distanceMap[endNode])
-
     return(path)
     
 
 
-            
-            
-        
 
 inputFile = str(sys.argv[1])
 outputFile = str(sys.argv[2])
@@ -214,8 +183,6 @@ for line in wholeFile:
         graph[words[0]] = [(words[1],words[2])]
     else:     
         graph[words[0]].append((words[1],words[2]))
-   
-#print (graph['A'])
 
 #print(searchType)
 if searchType == "DFS" :
@@ -223,16 +190,9 @@ if searchType == "DFS" :
 
 if searchType == "BFS":
     path =bfs(startNode, endNode)
-    
-
 
 if searchType == "UCS":
     path =ucs(startNode, endNode)
-
-#print (inputFile+outputFile+startNode+endNode+searchType)
-
-#path = bfs(startNode, endNode)
-
 result(path,output)
 
 
