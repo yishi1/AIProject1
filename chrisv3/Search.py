@@ -1,4 +1,4 @@
-https://github.com/blarblar/AIProject1.githttps://github.com/blarblar/AIProject1.git# File name: Search.py
+# File name: Search.py
 # Author: Christine Vu
 # Date: Feb 10, 2016
 # Email: chrisv3@umbc.edu
@@ -361,7 +361,8 @@ def main():
         result = UCS(d, 'A', 'F', keys)
         print "UCS = ", result
 
-        for i in range(len(result)):
+        for i in range(len(result)-1):
+            print result[i]
             writeTo.write(result[i])
             writeTo.write("\n")
 
