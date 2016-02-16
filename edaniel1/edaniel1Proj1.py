@@ -23,11 +23,11 @@ def main():
     costUCS = {}
     
     inFile = open(readFile, "r")
+    
+    #sets up the dictionaries
     for line in inFile:
         
         node1, node2, weight = line.split()
-        
-        print(node1 + node2 + weight)
         
         if node1 not in graph:
             graph[node1] = {}
@@ -43,11 +43,9 @@ def main():
     
     costUCS[stNode][1] = 0
     
-    print (graph)
-    print (costUCS)
-
     visited = [stNode]
     
+    #chooses search based on inline arguments
     if (searchType == "BFS"):
         result, visited, endFound = breadthFirstSearch(graph, stNode, enNode, visited)
     elif (searchType == "DFS"):
@@ -57,9 +55,8 @@ def main():
     else:
         result, endFound = "Invalid Search Type", False
         
-    
-    print (result, endFound)    
-    
+      
+    #writes results to file
     outFile = open(writeFile, "w")
     if endFound:
         for node in result:
@@ -70,6 +67,7 @@ def main():
     outFile.close()
     
 
+#recursive
 def breadthFirstSearch(graph, stNode, enNode, visited):    
     
     pathQueue = Queue()
@@ -99,14 +97,14 @@ def breadthFirstSearch(graph, stNode, enNode, visited):
     
     return [], visited, endFound
     
+    
+#recursive  
 def depthFirstSearch(graph, stNode, enNode, visited):
     
     if stNode not in graph:
         return [], visited, False
     
     for node in graph[stNode]:
-        
-        print(stNode,node)
         
         if node not in visited:
             visited.append(node)
@@ -117,12 +115,13 @@ def depthFirstSearch(graph, stNode, enNode, visited):
             result, visited, endFound = depthFirstSearch(graph, node, enNode, visited)
             
             if (endFound):
-                print(result)
                 result.insert(0, stNode)
                 return result, visited, endFound
     
     return [], visited, False
     
+    
+#NOT recursive
 def uniformCostSearch(graph, stNode, enNode, visited, costUCS):
     
     currNode = stNode
@@ -169,6 +168,7 @@ def uniformCostSearch(graph, stNode, enNode, visited, costUCS):
             return "", visited, False
     
 
+#queue class
 class Queue:
     
     def __init__(self):
