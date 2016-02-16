@@ -4,7 +4,8 @@
 
 import sys
 
-def make_graph(filename):          
+def make_graph(filename):   
+    #dictionary of tuples 
     graph = {}
     f = open(filename, "r")
     for l in f:
@@ -15,7 +16,8 @@ def make_graph(filename):
             graph[line[0]].add((line[1], line[2]))
         else:
             graph[line[0]] = {(line[1], line[2])}
-            
+    
+    f.close()        
     return graph
 
 def bfs_path(graph, start, goal):
@@ -75,6 +77,8 @@ def write_path(filename, path):
             f.write("%s\n" % node)
     else:
         f.write("No path found \n")
+        
+    f.close()
 
 def main():
 
